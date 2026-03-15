@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOD010837 &mdash; Guided Worksheets Q1&ndash;Q4</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Source+Sans+3:wght@400;500;600&display=swap');
+:root{--navy:#1B3A5C;--blue:#2E6DA4;--lblue:#EAF3FB;--bblue:#93C5D8;--gold:#B07A20;--goldl:#FDF5E0;--green:#1F5C2E;--lgreen:#EAF5EC;--bgreen:#3A9050;--cream:#FDFBF4;--cream2:#F3EFE1;--grey:#6B7280;--lgrey:#E5E7EB;--red:#B91C1C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--navy);font-size:15px;line-height:1.6}
+header{background:var(--navy);color:white}
+.header-top{padding:10px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.15);flex-wrap:wrap;gap:6px}
+.header-top h1{font-family:'Lora',serif;font-size:14px;font-weight:600}
+.ai-tag{font-size:11px;background:var(--red);color:white;padding:2px 8px;border-radius:3px;font-weight:600;white-space:nowrap}
+.q-tabs{display:flex;padding:0 16px;flex-wrap:wrap}
+.q-tab{padding:9px 16px;border:none;background:transparent;color:rgba(255,255,255,.5);font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:all .18s}
+.q-tab.active{color:white;border-bottom-color:#7CB9E0}
+.q-tab:hover:not(.active){color:rgba(255,255,255,.8)}
+.progress-bar{background:var(--cream2);border-bottom:1px solid #DDD8C8;padding:10px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.step-btn{padding:5px 14px;border-radius:20px;border:1.5px solid var(--lgrey);background:white;font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:500;color:var(--grey);cursor:pointer;transition:all .18s}
+.step-btn.active{background:var(--navy);color:white;border-color:var(--navy);font-weight:600}
+.step-btn.done{background:var(--lgreen);color:var(--green);border-color:var(--bgreen)}
+.step-divider{color:#CCC;font-size:12px}
+main{max-width:880px;margin:0 auto;padding:24px 24px 60px}
+.page{display:none}.page.active{display:block}
+.page-title{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--cream2)}
+.part-label{font-family:'Lora',serif;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);background:var(--lblue);padding:3px 10px;border-radius:3px;white-space:nowrap}
+.page-title h2{font-family:'Lora',serif;font-size:19px;font-weight:600;color:var(--navy)}
+.sh{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);margin:18px 0 7px;display:flex;align-items:center;gap:8px}
+.sh::after{content:'';flex:1;height:1px;background:var(--bblue);opacity:.4}
+.info-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:4px;border:1px solid #C8D8E8}
+.info-table thead tr{background:var(--navy);color:white}
+.info-table thead.blue tr{background:var(--blue)}
+.info-table thead.green tr{background:var(--green)}
+.info-table th{padding:7px 10px;font-size:11.5px;font-weight:600;text-align:left}
+.info-table td{padding:7px 10px;vertical-align:top;border-bottom:1px solid #DCE8F0;line-height:1.45;font-size:13px}
+.info-table tbody tr:nth-child(odd) td{background:#F4F8FC}
+.info-table tbody tr:nth-child(even) td{background:white}
+.info-table tbody tr.hl td{background:#FFF8DC;font-weight:600}
+.info-table tbody tr.go td{background:#F2FAF3}
+.info-table tbody tr.ge td{background:white}
+.info-table td:first-child{font-weight:600;color:var(--blue)}
+.gsrc td:first-child{color:var(--green)!important}
+.src{font-size:11.5px;color:var(--blue);font-style:italic;white-space:nowrap}
+.sm{font-size:11.5px;color:var(--grey)}
+b{font-weight:600}
+.note{background:var(--lblue);border-left:3px solid var(--blue);border-radius:0 4px 4px 0;padding:10px 14px;font-size:13px;margin-bottom:12px}
+.note.gold{background:var(--goldl);border-left-color:var(--gold)}
+.note.green{background:var(--lgreen);border-left-color:var(--bgreen);color:var(--green)}
+.snip{background:#FFFBF0;border:1px solid #E8C96A;border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:5px 10px;font-size:12px;color:#5C4A00;margin-bottom:6px}
+.snip strong{font-weight:700}
+.cite-chip{display:inline-block;background:#EEF6FF;border:1px solid #93C5D8;color:var(--blue);font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+.q-row{margin:0 0 12px 0;border:1px solid #D4E4F0;border-radius:6px;overflow:hidden}
+.q-head{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;background:white;border-bottom:1px solid #D4E4F0}
+.q-letter{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;border-radius:50%;background:var(--navy);color:white;font-size:11px;font-weight:700;margin-top:2px;flex-shrink:0}
+.q-text{font-size:13.5px;color:var(--navy);line-height:1.5;padding-top:2px}
+.q-box-top{display:flex;justify-content:space-between;align-items:center;padding:5px 12px;background:var(--cream2);border-bottom:1px solid #D4E4F0;flex-wrap:wrap;gap:4px}
+.q-box-top .lbl{font-size:11.5px;color:var(--grey)}
+.wc{font-size:11.5px;font-weight:700;padding:2px 10px;border-radius:10px;border:1px solid #CCC;background:white;color:var(--grey);white-space:nowrap;transition:all .2s}
+.wc.ok{background:var(--lgreen);color:var(--green);border-color:var(--bgreen)}
+.wc.over{background:#FEE2E2;color:var(--red);border-color:var(--red)}
+textarea{width:100%;min-height:85px;padding:9px 12px;font-family:'Source Sans 3',sans-serif;font-size:13.5px;line-height:1.6;color:var(--navy);background:#FAFCFF;border:none;outline:none;resize:vertical;display:block}
+.paste-note{font-size:11px;color:#999;padding:4px 12px 5px;background:#FAFCFF;border-top:1px dashed #D4E4F0}
+.diag-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:10px 0 16px}
+.diag-card{border:1.5px solid #C8D8E8;border-radius:6px;overflow:hidden;background:white}
+.diag-card.gc{border-color:var(--bgreen)}
+.diag-card-head{padding:8px 12px;background:var(--lblue);font-size:12.5px;font-weight:700;color:var(--blue);border-bottom:1px solid #C8D8E8}
+.diag-card.gc .diag-card-head{background:var(--lgreen);color:var(--green);border-color:var(--bgreen)}
+.diag-card svg{display:block;width:100%;height:auto}
+.diag-card-note{padding:8px 12px;font-size:12px;color:var(--grey);border-top:1px solid #EEE;background:white}
+.draw-box{border:2px dashed var(--gold);border-radius:6px;padding:16px 20px;text-align:center;background:var(--goldl);margin:12px 0}
+.draw-box .icon{font-size:30px;margin-bottom:6px}
+.draw-box p{font-size:13.5px;color:var(--gold);font-weight:700}
+.draw-box span{font-size:12.5px;color:#6B5000;display:block;margin-top:4px}
+.hint{background:var(--lgreen);border-left:3px solid var(--bgreen);border-radius:0 4px 4px 0;padding:10px 14px;font-size:13px;color:var(--green);margin:10px 0}
+.hint strong{display:block;margin-bottom:4px}
+.lvl{margin-top:4px}
+.access-step{display:flex;gap:12px;align-items:baseline;padding:8px 12px;border-bottom:1px solid #E0EAF4;font-size:13px}
+.access-step:last-child{border-bottom:none}
+.access-step .snum{min-width:22px;font-weight:700;color:var(--blue)}
+.access-box{border:1px solid #C8D8E8;border-radius:6px;overflow:hidden;margin-bottom:12px;background:white}
+.tactic-card{background:white;border:1.5px solid #C8D8E8;border-radius:6px;padding:12px 14px;font-size:13px;margin-bottom:8px}
+.tactic-card h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:5px}
+.screenshot-note{background:#F0F4FF;border:1.5px solid #93C5D8;border-radius:6px;padding:14px 18px;margin-bottom:12px;font-size:13px}
+.screenshot-note h4{font-weight:700;color:var(--navy);margin-bottom:6px}
+.refs{margin-top:22px;padding:16px 20px;background:var(--cream2);border-radius:6px;border:1px solid #D8D0BC}
+.refs h3{font-family:'Lora',serif;font-size:14px;color:var(--blue);margin-bottom:10px}
+.refs p{font-size:12.5px;margin-bottom:6px;line-height:1.5}
+.nav-btns{display:flex;justify-content:space-between;margin-top:26px;padding-top:14px;border-top:1px solid var(--cream2)}
+.nav-btn{padding:9px 22px;border-radius:4px;border:1.5px solid var(--navy);font-family:'Source Sans 3',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;color:var(--navy);transition:all .18s}
+.nav-btn.primary{background:var(--navy);color:white}
+.nav-btn:hover{opacity:.8}
+.nav-btn:disabled{opacity:.3;cursor:default}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(50px);background:var(--red);color:white;padding:10px 22px;border-radius:6px;font-weight:600;font-size:13px;z-index:9999;opacity:0;transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.chart-note{background:var(--lblue);border:1.5px solid var(--bblue);border-radius:6px;padding:20px 24px;text-align:center;color:var(--blue);font-size:14px;margin:20px 0}
+.chart-note .icon{font-size:34px;margin-bottom:8px}
+.chart-note p{margin-top:6px;font-size:13px;color:var(--grey)}
+@media(max-width:680px){.diag-row{grid-template-columns:1fr}main{padding:14px 12px 50px}.q-tab{padding:8px 12px;font-size:12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-top">
+    <h1>MOD010837 &mdash; Financial Environment and Analysis &nbsp;|&nbsp; Guided Worksheets Q1&ndash;Q4</h1>
+    <span class="ai-tag">AI NOT PERMITTED &mdash; Category 1</span>
+  </div>
+  <div class="q-tabs">
+    <button class="q-tab active" onclick="switchQ(1)">Q1 &mdash; Coconut Oil</button>
+    <button class="q-tab" onclick="switchQ(2)">Q2 &mdash; Bank Rate</button>
+    <button class="q-tab" onclick="switchQ(3)">Q3 &mdash; Craft Beer</button>
+    <button class="q-tab" onclick="switchQ(4)">Q4 &mdash; Consumer Tactics</button>
+  </div>
+</header>
+<div class="progress-bar" id="progress-bar"></div>
+<div class="toast" id="toast">&#x26D4; Typing only &mdash; pasting is not allowed</div>
+<main>
+<div class="page active" id="p-q1-1">
+  <div class="page-title"><span class="part-label">Q1 &middot; Part 1</span><h2>Create your line chart</h2></div>
+  <div class="chart-note">
+    <div class="icon">&#128202;</div>
+    <strong>Your teacher will provide you with the chart.</strong>
+    <p>Paste it into your Word document. Label x-axis <b>Date</b>, y-axis <b>Price ($/mt)</b>. Add a title.</p>
+    <p style="margin-top:6px">Source: World Bank (2026) Pink Sheet &mdash; worldbank.org/en/research/commodity-markets</p>
+  </div>
+  <div class="nav-btns"><button class="nav-btn" disabled>&larr; Previous</button><button class="nav-btn primary" onclick="goTo(1,2)">Next: Describe price changes &rarr;</button></div>
+</div><div class="page" id="p-q1-2">
+  <div class="page-title"><span class="part-label">Q1 &middot; Part 2</span><h2>Describe the price changes</h2></div>
+  <div class="note">Each question points to a specific row in the table below. Write in your own words &mdash; do not copy the table. Aim for <b>~100 words total</b>.</div>
+  <div class="sh">Price data &mdash; World Bank (2026)</div>
+  <table class="info-table">
+    <thead><tr><th style="width:22%">Period</th><th style="width:26%">Price ($/mt)</th><th>Trend</th></tr></thead>
+    <tbody>
+      <tr><td>Jun 2023 (start)</td><td><b>$1,012.73</b></td><td>Starting price</td></tr>
+      <tr><td>Jul &ndash; Dec 2023</td><td>$966 &ndash; $1,114</td><td>Relatively flat &mdash; minor variation only</td></tr>
+      <tr><td>2024 (full year)</td><td>$1,130 &rarr; <b>$1,973</b></td><td>Gradual steady rise throughout the year</td></tr>
+      <tr><td>March 2025</td><td>&rarr; <b>$2,356</b></td><td>&#11014; Steepest single monthly jump in the whole period</td></tr>
+      <tr class="hl"><td>July 2025 &#9733;</td><td><b>$2,841 &mdash; PEAK</b></td><td>Highest price in the whole period</td></tr>
+      <tr><td>Aug &ndash; Dec 2025</td><td>$2,841 &rarr; $2,323</td><td>&#11015; Falling &mdash; down $518/mt (&minus;18%) from peak</td></tr>
+      <tr><td>January 2026 (end)</td><td><b>$2,197</b></td><td>Continuing to fall &mdash; still far above Jun 2023</td></tr>
+      <tr><td><b>Overall Jun 2023 &ndash; Jan 2026</b></td><td><b>+$1,184/mt (+117%)</b></td><td>More than doubled over the full period</td></tr>
+    </tbody>
+  </table>
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Row 1 &mdash; "Jun 2023 | <strong>$1,012.73</strong>"</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">What was the exact price of coconut oil in June 2023? Name your source.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (World Bank, 2026)</span><span class="wc" id="wc-q1p2a">0 words</span></div></div>
+  <textarea id="ta-q1p2a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p2a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Rows 2 and 3 &mdash; "Jul&ndash;Dec 2023: $966&ndash;$1,114 (flat)" then "2024: $1,130 &rarr; $1,973 (gradual rise)"</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">How would you describe the price movement through the rest of 2023 and into 2024 &mdash; rising, falling or flat?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p2b">0 words</span></div></div>
+  <textarea id="ta-q1p2b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p2b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Row 4 &mdash; "March 2025 &rarr; <strong>$2,356</strong> | Steepest single monthly jump"</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">Which month saw the steepest single monthly rise, and what was the price that month?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p2c">0 words</span></div></div>
+  <textarea id="ta-q1p2c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p2c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Row 5 (highlighted) &mdash; "July 2025 &#9733; | <strong>$2,841 &mdash; PEAK</strong>"</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">When did the price peak and what was the peak price?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (World Bank, 2026)</span><span class="wc" id="wc-q1p2d">0 words</span></div></div>
+  <textarea id="ta-q1p2d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p2d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Row 6 &mdash; "Aug&ndash;Dec 2025 | $2,841 &rarr; $2,323 | Falling &minus;$518/mt (&minus;18%)"</div>
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">What happened to the price after July 2025 &mdash; how much did it fall and over which months?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p2e">0 words</span></div></div>
+  <textarea id="ta-q1p2e" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p2e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Row 7 &mdash; "January 2026 | <strong>$2,197</strong>"</div>
+  <div class="q-head"><span class="q-letter">f</span><span class="q-text">What was the price by January 2026?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p2f">0 words</span></div></div>
+  <textarea id="ta-q1p2f" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p2f')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Last row &mdash; "<strong>+$1,184/mt (+117%)</strong> &mdash; more than doubled"</div>
+  <div class="q-head"><span class="q-letter">g</span><span class="q-text">What was the overall price change from June 2023 to January 2026? Give as % or $/mt.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p2g">0 words</span></div></div>
+  <textarea id="ta-q1p2g" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p2g')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; When done, copy all answers into Word as one flowing paragraph. Include <b>(World Bank, 2026)</b> as your citation.</div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(1,1)">&larr; Back</button><button class="nav-btn primary" onclick="goTo(1,3)">Next: Explain why &rarr;</button></div>
+</div><div class="page" id="p-q1-3">
+  <div class="page-title"><span class="part-label">Q1 &middot; Part 3</span><h2>Explain why the price changed</h2></div>
+  <div class="note">Each question points to the relevant table and row. Pick any 2 from Table A (supply), any 2 from Table B (demand), any 1 from Table C (decline). Aim for <b>~100 words total</b>. Write in your own words.</div>
+  <div class="sh">Table A &mdash; Supply: why did production fall? &nbsp; Pick any 2 from A&ndash;F</div>
+  <table class="info-table">
+    <thead class="blue"><tr><th style="width:5%">Ref</th><th style="width:20%">Source</th><th>Key facts</th><th style="width:13%" class="src">Cite as</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td><b>USDA FAS (2024)</b><br><span class="sm">fas.usda.gov</span></td><td>Philippines + Indonesia = <b>75% of world supply</b>. El Ni&ntilde;o caused USDA to forecast a <b>15% fall</b> in Philippine production 2024/25. Less copra (dried coconut meat) = less oil.</td><td class="src">(USDA, 2024)</td></tr>
+      <tr><td>B</td><td><b>Philippine Star (2024)</b><br><span class="sm">philstar.com</span></td><td>El Ni&ntilde;o forecast to cut Philippine exports by <b>~21%</b> to 900,000mt. Copra: <b>2.94m &rarr; 2.5m mt</b>. EU contamination rules added further supply pressure.</td><td class="src">(Recide, 2024)</td></tr>
+      <tr><td>C</td><td><b>Reuters (2025)</b><br><span class="sm">reuters.com</span></td><td>Global output showed <b>no significant growth in 30 years</b>. El Ni&ntilde;o 2023 only hit supply in 2024 because <b>coconuts take ~1 year to mature</b>. Indonesia cut oil exports by <b>15%</b> in early 2025.</td><td class="src">(Reuters, 2025)</td></tr>
+      <tr><td>D</td><td><b>Al Jazeera (2025)</b><br><span class="sm">aljazeera.com</span></td><td>Philippines + Indonesia = <b>three-quarters of global supply</b>. El Ni&ntilde;o drier weather Jun&ndash;Oct 2023. Global production forecast to fall to <b>3.6m tonnes</b> in 2024/25, down 5&ndash;10%.</td><td class="src">(Al Jazeera, 2025)</td></tr>
+      <tr><td>E</td><td><b>IBISWorld (2025)</b><br><span class="sm">ARU Library</span></td><td>UK Oil and Fat Production: supply chains faced <b>significant instability</b> due to weather events in key producing regions, pushing up UK manufacturer input costs.</td><td class="src">(IBISWorld, 2025)</td></tr>
+      <tr><td>F</td><td><b>Helios Ingredients (2025)</b><br><span class="sm">heliosingredients.com</span></td><td>Three pressures simultaneously: El Ni&ntilde;o across Philippines, Indonesia, Sri Lanka, Vietnam; <b>ageing trees</b> (4&ndash;6 years to replace); Philippines biodiesel mandate diverting coconuts. CNO at <b>$2,535&ndash;2,680/mt</b> in H2 2025.</td><td class="src">(Helios Ingredients, 2025)</td></tr>
+    </tbody>
+  </table>
+  <div class="sh" style="margin-top:14px">Table B &mdash; Demand: why did demand stay strong? &nbsp; Pick any 2 from G&ndash;K</div>
+  <table class="info-table">
+    <thead class="blue"><tr><th style="width:5%">Ref</th><th style="width:20%">Source</th><th>Key facts</th><th style="width:13%" class="src">Cite as</th></tr></thead>
+    <tbody>
+      <tr><td>G</td><td><b>ICC Jan 2025</b><br><span class="sm">coconutcommunity.org</span></td><td>Prices rose <b>73%</b> in 2024 (Jan: $1,126 &rarr; Dec: $1,949/mt). US imports up <b>19.1%</b>. Strong demand: food, cosmetics, biofuel.</td><td class="src">(ICC, 2025a)</td></tr>
+      <tr><td>H</td><td><b>ICC May 2025</b><br><span class="sm">coconutcommunity.org</span></td><td>El Ni&ntilde;o cut global output by further <b>2.5%</b> for 2024/25. Prices reached <b>$2,587/mt</b> by April 2025. Sustained demand: food, cosmetics, pharmaceuticals.</td><td class="src">(ICC, 2025b)</td></tr>
+      <tr><td>I</td><td><b>Al Jazeera (2025)</b><br><span class="sm">aljazeera.com</span></td><td>Philippines biodiesel plan: <b>4.5 billion coconuts</b> by 2026. Chocolate makers switching to coconut oil. Global ice cream industry (worth <b>$81 billion</b> in 2024) relies on coconut oil.</td><td class="src">(Al Jazeera, 2025)</td></tr>
+      <tr><td>J</td><td><b>Mordor Intelligence (2025)</b><br><span class="sm">mordorintelligence.com</span></td><td>Food and beverages = <b>65%</b> of global market 2024. Cosmetics/personal care growing at <b>7.86% annually</b>. Global market worth <b>$7.21 billion</b> in 2025.</td><td class="src">(Mordor Intelligence, 2025)</td></tr>
+      <tr><td>K</td><td><b>Milling Middle East &amp; Africa (2025)</b><br><span class="sm">millingmea.com</span></td><td>Prices nearly <b>tripled</b> in under two years. Demand drivers: food and beverage, cosmetics/personal care, and <b>pharmaceutical</b> industries all growing simultaneously.</td><td class="src">(Milling Middle East &amp; Africa, 2025)</td></tr>
+    </tbody>
+  </table>
+  <div class="sh" style="margin-top:14px">Table C &mdash; Decline: why did prices fall after July 2025? &nbsp; Pick any 1 from L&ndash;P</div>
+  <table class="info-table">
+    <thead class="green"><tr><th style="width:5%">Ref</th><th style="width:20%">Source</th><th>Key facts</th><th style="width:13%" class="src">Cite as</th></tr></thead>
+    <tbody>
+      <tr class="go gsrc"><td>L</td><td><b>ICC 2026 Outlook</b><br><span class="sm">coconutcommunity.org</span></td><td>El Ni&ntilde;o fading &mdash; supply recovering. Philippine output: <b>1.57m (2024) &rarr; 1.36m (2025) &rarr; forecast 1.60m mt (2026)</b>. Global: <b>3.16m &rarr; 3.5m mt</b>.</td><td class="src">(ICC, 2026)</td></tr>
+      <tr class="ge gsrc"><td>M</td><td><b>Vespertool (2025)</b><br><span class="sm">vespertool.com</span></td><td>Copra prices: <b>$1,600 &rarr; $1,230/mt</b>. ICC revised 2025 forecast up by 65,000mt. Philippine government <b>postponed biodiesel mandate increase</b>, easing demand.</td><td class="src">(Vespertool, 2025)</td></tr>
+      <tr class="go gsrc"><td>N</td><td><b>TM Duch&eacute; &amp; Sons (2026)</b><br><span class="sm">tmduche.com</span></td><td>By mid-Dec 2025: European prices in <b>low-to-mid $2,200s/mt</b>. Decreasing copra prices indicate upstream supply relief. Still at premium over palm oil &mdash; stabilising, not collapsing.</td><td class="src">(TM Duch&eacute; &amp; Sons, 2026)</td></tr>
+      <tr class="ge gsrc"><td>O</td><td><b>ChemAnalyst (2025)</b><br><span class="sm">chemanalyst.com</span></td><td>Q4 2025: Netherlands (Rotterdam) price index fell by <b>10.28% quarter-over-quarter</b>. Comfortable inventory. Buyers deferred purchases. Increased copra arrivals pressured prices.</td><td class="src">(ChemAnalyst, 2025)</td></tr>
+      <tr class="go gsrc"><td>P</td><td><b>UkrAgroConsult (2025)</b><br><span class="sm">ukragroconsult.com</span></td><td>World Bank data: price fell from <b>$2,547/mt (Oct 2025) &rarr; $2,469/mt (Nov 2025)</b> &mdash; a <b>3% drop</b> in one month as Southeast Asian supply improved.</td><td class="src">(UkrAgroConsult, 2025)</td></tr>
+    </tbody>
+  </table>
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table A, row A or D &mdash; "Philippines + Indonesia = <strong>75%</strong>" (USDA) or "<strong>three-quarters</strong>" (Al Jazeera)</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">Which two countries produce most of the world&apos;s coconut oil, and what share do they produce together?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (USDA, 2024) or (Al Jazeera, 2025)</span><span class="wc" id="wc-q1p3a">0 words</span></div></div>
+  <textarea id="ta-q1p3a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p3a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table A, any row A&ndash;D &mdash; look for "El Ni&ntilde;o", "drought", "drier weather Jun&ndash;Oct 2023", "reduced harvests"</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">What weather event affected these countries, and what did it do to coconut harvests?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p3b">0 words</span></div></div>
+  <textarea id="ta-q1p3b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p3b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table A, row A &mdash; "copra = <strong>dried coconut meat</strong>". Less copra available &rarr; less raw material &rarr; less oil produced</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">What is copra? How does a fall in copra supply lead to a fall in coconut oil supply?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p3c">0 words</span></div></div>
+  <textarea id="ta-q1p3c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p3c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table B, rows G&ndash;K &mdash; food, cosmetics, pharmaceuticals, biofuel, ice cream, chocolate, biodiesel mandate</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">Why did global demand for coconut oil stay strong? Which industries were driving it?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: e.g. (ICC, 2025a) or (Mordor Intelligence, 2025)</span><span class="wc" id="wc-q1p3d">0 words</span></div></div>
+  <textarea id="ta-q1p3d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p3d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Combine your answers above &mdash; supply curve shifted <strong>left</strong> (less produced), demand curve shifted <strong>right</strong> (more wanted), both push price upward to a new higher equilibrium</div>
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">How do falling supply and strong demand together explain the price rise? Use supply and demand language.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p3e">0 words</span></div></div>
+  <textarea id="ta-q1p3e" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p3e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table C, any row L&ndash;P &mdash; look for "El Ni&ntilde;o fading", "copra prices fell", "biodiesel mandate postponed", "supply recovering"</div>
+  <div class="q-head"><span class="q-letter">f</span><span class="q-text">Why did the price begin to fall after July 2025? What changed on the supply or demand side?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: e.g. (Vespertool, 2025) or (ICC, 2026)</span><span class="wc" id="wc-q1p3f">0 words</span></div></div>
+  <textarea id="ta-q1p3f" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p3f')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+
+  <div class="q-head"><span class="q-letter">g</span><span class="q-text">List the sources you are using &mdash; at least 2 (one supply, one demand or decline).</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p3g">0 words</span></div></div>
+  <textarea id="ta-q1p3g" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q1p3g')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; <b>How to cite:</b> Use (World Bank, 2026) PLUS any 2 from A&ndash;F (supply) PLUS any 2 from G&ndash;K (demand) PLUS any 1 from L&ndash;P (decline) = <b>6 citations total</b>. When done, copy all answers into Word as one flowing paragraph.</div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(1,2)">&larr; Back</button><button class="nav-btn primary" onclick="goTo(1,4)">Next: Diagram &rarr;</button></div>
+</div><div class="page" id="p-q1-4">
+  <div class="page-title"><span class="part-label">Q1 &middot; Part 4</span><h2>Supply and demand diagram + explanation</h2></div>
+  <div class="sh">Step 1 &mdash; Study the diagrams and choose your option(s)</div>
+  <div class="note">Look at all three diagrams carefully. Choose the option(s) that best match what happened to coconut oil prices. You may select more than one.</div>
+  <div class="diag-row">
+    <div class="diag-card"><div class="diag-card-head">Option A &mdash; Supply shifts LEFT &uarr; Price rises</div><svg viewBox="0 0 200 178" xmlns="http://www.w3.org/2000/svg" style="font-family:sans-serif">
+<rect width="200" height="178" fill="#FAFCFF"/>
+<defs><marker id="arrA" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1B3A5C"/></marker></defs>
+<line x1="25" y1="12" x2="25" y2="162" stroke="#1B3A5C" stroke-width="1.8" marker-end="url(#arrA)"/>
+<line x1="23" y1="160" x2="188" y2="160" stroke="#1B3A5C" stroke-width="1.8" marker-end="url(#arrA)"/>
+<text x="21" y="10" font-size="11" fill="#1B3A5C" text-anchor="middle" font-weight="600">P</text>
+<text x="192" y="164" font-size="11" fill="#1B3A5C" text-anchor="middle" font-weight="600">Q</text>
+<line x1="48" y1="40" x2="166" y2="155" stroke="#2E6DA4" stroke-width="1.8"/>
+<text x="168" y="158" font-size="10" fill="#2E6DA4" font-weight="700">D</text>
+<line x1="50" y1="155" x2="160" y2="35" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="162" y="33" font-size="10" fill="#888">S1</text>
+<line x1="25" y1="155" x2="133" y2="28" stroke="#1B3A5C" stroke-width="2"/>
+<text x="135" y="26" font-size="10" fill="#1B3A5C" font-weight="700">S2</text>
+<defs><marker id="gaA" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#C8922A"/></marker></defs>
+<path d="M 98,83 L 80,65" stroke="#C8922A" stroke-width="1.4" marker-end="url(#gaA)" fill="none"/>
+<line x1="25" y1="95" x2="105" y2="95" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="105" y1="95" x2="105" y2="160" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="25" y1="74" x2="88" y2="74" stroke="#1B3A5C" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="88" y1="74" x2="88" y2="160" stroke="#1B3A5C" stroke-width="1" stroke-dasharray="3,3"/>
+<circle cx="105" cy="95" r="3.5" fill="#888"/>
+<circle cx="88" cy="74" r="3.5" fill="#1B3A5C"/>
+<text x="21" y="99" font-size="9.5" fill="#666" text-anchor="end">P1</text>
+<text x="21" y="78" font-size="9.5" fill="#1B3A5C" font-weight="700" text-anchor="end">P2</text>
+<text x="105" y="172" font-size="9.5" fill="#666" text-anchor="middle">Q1</text>
+<text x="88" y="172" font-size="9.5" fill="#1B3A5C" font-weight="700" text-anchor="middle">Q2</text>
+<defs><marker id="raA" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#B91C1C"/></marker></defs>
+<path d="M 15,95 L 15,74" stroke="#B91C1C" stroke-width="1.8" marker-end="url(#raA)" fill="none"/>
+<text x="12" y="88" font-size="9" fill="#B91C1C" font-weight="700" text-anchor="end">&#8593;P</text>
+</svg><div class="diag-card-note">El Ni&ntilde;o reduces production &rarr; S shifts left (S1&rarr;S2) &rarr; price rises P1&rarr;P2, quantity falls Q1&rarr;Q2.</div></div>
+    <div class="diag-card"><div class="diag-card-head">Option B &mdash; Demand shifts RIGHT &uarr; Price rises</div><svg viewBox="0 0 200 178" xmlns="http://www.w3.org/2000/svg" style="font-family:sans-serif">
+<rect width="200" height="178" fill="#FAFCFF"/>
+<defs><marker id="arrB" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1B3A5C"/></marker></defs>
+<line x1="25" y1="12" x2="25" y2="162" stroke="#1B3A5C" stroke-width="1.8" marker-end="url(#arrB)"/>
+<line x1="23" y1="160" x2="188" y2="160" stroke="#1B3A5C" stroke-width="1.8" marker-end="url(#arrB)"/>
+<text x="21" y="10" font-size="11" fill="#1B3A5C" text-anchor="middle" font-weight="600">P</text>
+<text x="192" y="164" font-size="11" fill="#1B3A5C" text-anchor="middle" font-weight="600">Q</text>
+<line x1="50" y1="155" x2="160" y2="35" stroke="#1B3A5C" stroke-width="1.8"/>
+<text x="162" y="33" font-size="10" fill="#1B3A5C" font-weight="700">S</text>
+<line x1="48" y1="40" x2="160" y2="148" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="162" y="151" font-size="10" fill="#888">D1</text>
+<line x1="76" y1="40" x2="185" y2="145" stroke="#2E6DA4" stroke-width="2"/>
+<text x="187" y="148" font-size="10" fill="#2E6DA4" font-weight="700">D2</text>
+<defs><marker id="gaB" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#C8922A"/></marker></defs>
+<path d="M 110,112 L 134,100" stroke="#C8922A" stroke-width="1.4" marker-end="url(#gaB)" fill="none"/>
+<line x1="25" y1="95" x2="105" y2="95" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="105" y1="95" x2="105" y2="160" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="25" y1="80" x2="120" y2="80" stroke="#2E6DA4" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="120" y1="80" x2="120" y2="160" stroke="#2E6DA4" stroke-width="1" stroke-dasharray="3,3"/>
+<circle cx="105" cy="95" r="3.5" fill="#888"/>
+<circle cx="120" cy="80" r="3.5" fill="#2E6DA4"/>
+<text x="21" y="99" font-size="9.5" fill="#666" text-anchor="end">P1</text>
+<text x="21" y="84" font-size="9.5" fill="#2E6DA4" font-weight="700" text-anchor="end">P2</text>
+<text x="105" y="172" font-size="9.5" fill="#666" text-anchor="middle">Q1</text>
+<text x="120" y="172" font-size="9.5" fill="#2E6DA4" font-weight="700" text-anchor="middle">Q2</text>
+<defs><marker id="raB" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#B91C1C"/></marker></defs>
+<path d="M 15,95 L 15,80" stroke="#B91C1C" stroke-width="1.8" marker-end="url(#raB)" fill="none"/>
+<text x="12" y="91" font-size="9" fill="#B91C1C" font-weight="700" text-anchor="end">&#8593;P</text>
+</svg><div class="diag-card-note">Growing food/cosmetics/biofuel demand &rarr; D shifts right (D1&rarr;D2) &rarr; price rises P1&rarr;P2, quantity rises Q1&rarr;Q2.</div></div>
+    <div class="diag-card gc"><div class="diag-card-head">Option C &mdash; Supply shifts RIGHT &darr; Price falls</div><svg viewBox="0 0 200 178" xmlns="http://www.w3.org/2000/svg" style="font-family:sans-serif">
+<rect width="200" height="178" fill="#FAFCFF"/>
+<defs><marker id="arrC" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1B3A5C"/></marker></defs>
+<line x1="25" y1="12" x2="25" y2="162" stroke="#1B3A5C" stroke-width="1.8" marker-end="url(#arrC)"/>
+<line x1="23" y1="160" x2="188" y2="160" stroke="#1B3A5C" stroke-width="1.8" marker-end="url(#arrC)"/>
+<text x="21" y="10" font-size="11" fill="#1B3A5C" text-anchor="middle" font-weight="600">P</text>
+<text x="192" y="164" font-size="11" fill="#1B3A5C" text-anchor="middle" font-weight="600">Q</text>
+<line x1="48" y1="40" x2="166" y2="155" stroke="#2E6DA4" stroke-width="1.8"/>
+<text x="168" y="158" font-size="10" fill="#2E6DA4" font-weight="700">D</text>
+<line x1="50" y1="155" x2="160" y2="35" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+<text x="162" y="33" font-size="10" fill="#888">S1</text>
+<line x1="78" y1="155" x2="183" y2="33" stroke="#1F5C2E" stroke-width="2"/>
+<text x="185" y="31" font-size="10" fill="#1F5C2E" font-weight="700">S2</text>
+<defs><marker id="gaC" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1F5C2E"/></marker></defs>
+<path d="M 112,70 L 132,58" stroke="#1F5C2E" stroke-width="1.4" marker-end="url(#gaC)" fill="none"/>
+<line x1="25" y1="95" x2="105" y2="95" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="105" y1="95" x2="105" y2="160" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="25" y1="110" x2="122" y2="110" stroke="#1F5C2E" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="122" y1="110" x2="122" y2="160" stroke="#1F5C2E" stroke-width="1" stroke-dasharray="3,3"/>
+<circle cx="105" cy="95" r="3.5" fill="#888"/>
+<circle cx="122" cy="110" r="3.5" fill="#1F5C2E"/>
+<text x="21" y="99" font-size="9.5" fill="#666" text-anchor="end">P1</text>
+<text x="21" y="114" font-size="9.5" fill="#1F5C2E" font-weight="700" text-anchor="end">P2</text>
+<text x="105" y="172" font-size="9.5" fill="#666" text-anchor="middle">Q1</text>
+<text x="122" y="172" font-size="9.5" fill="#1F5C2E" font-weight="700" text-anchor="middle">Q2</text>
+<defs><marker id="raC" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1F5C2E"/></marker></defs>
+<path d="M 15,110 L 15,95" stroke="#1F5C2E" stroke-width="1.8" marker-end="url(#raC)" fill="none"/>
+<text x="12" y="106" font-size="9" fill="#1F5C2E" font-weight="700" text-anchor="end">&#8595;P</text>
+</svg><div class="diag-card-note">El Ni&ntilde;o fades, supply recovers &rarr; S shifts right (S1&rarr;S2) &rarr; price falls P1&rarr;P2, quantity rises Q1&rarr;Q2. (Explains fall after July 2025.)</div></div>
+  </div>
+  <div class="draw-box">
+    <div class="icon">&#9999;&#65039;</div>
+    <p>Draw your chosen diagram on paper NOW &mdash; before you write anything.</p>
+    <span>Label: both axes (P and Q), both curves (S and D, or S1/S2 and D1/D2), equilibrium points (E1 and E2), and price/quantity labels (P1, P2, Q1, Q2). Photograph it or draw it in Word, then paste into your document.</span>
+  </div>
+  <div class="hint">
+    <strong>&#128161; Levels of thinking:</strong>
+    <div class="lvl"><b>Level 1:</b> Names a curve and direction only &mdash; no cause explained, no P/Q movement described.</div>
+    <div class="lvl"><b>Level 2:</b> Names the curve, explains the real-world cause of the shift, and describes what happens to P and Q at the new equilibrium.</div>
+    <div class="lvl"><b>Level 3:</b> Explains both supply AND demand shifting simultaneously and the combined effect on price &mdash; with real-world evidence.</div>
+    <div class="lvl"><b>Level 4:</b> Discusses elasticity &mdash; why supply and demand curves are steep (inelastic) and why this made the price change so large.</div>
+  </div>
+  <div class="sh">Step 2 &mdash; Answer each question</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Look at the diagram cards above &mdash; match the real-world event (El Ni&ntilde;o, rising demand, supply recovery) to the correct diagram option</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">Which option(s) did you choose (A, B or C), and why does it match what happened to coconut oil prices?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p4a">0 words</span></div></div>
+  <textarea id="ta-q1p4a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p4a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Option A = supply curve shifts <strong>left</strong>, caused by El Ni&ntilde;o. Option B = demand curve shifts <strong>right</strong>, caused by growing demand. Option C = supply curve shifts <strong>right</strong>, caused by supply recovery</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">Which curve shifted, in which direction, and what real-world event caused the shift?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p4b">0 words</span></div></div>
+  <textarea id="ta-q1p4b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p4b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Look at your chosen diagram &mdash; trace from E1 (grey dot) to E2 (coloured dot). Did P go up or down? Did Q go up or down?</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">Describe the movement from the old equilibrium (P1, Q1) to the new equilibrium (P2, Q2). What happened to price and quantity?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p4c">0 words</span></div></div>
+  <textarea id="ta-q1p4c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p4c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Options A + B together &mdash; supply shifted <strong>left</strong> AND demand shifted <strong>right</strong>. Both forces push price upward, making the price rise larger than either shift alone</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">Did both supply AND demand shift at the same time? If so, what was the combined effect on price?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p4d">0 words</span></div></div>
+  <textarea id="ta-q1p4d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p4d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Steep curves = <strong>inelastic</strong>. Supply is inelastic because coconut trees take years to grow &mdash; farmers cannot respond quickly. Demand is inelastic because coconut oil has few close substitutes for many industrial uses</div>
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">Are the supply and demand curves steep or flat? What does that tell us about elasticity, and how does it explain the large size of the price change?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q1p4e">0 words</span></div></div>
+  <textarea id="ta-q1p4e" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q1p4e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; <b>Reminders:</b> (1) Diagram must be in Word &mdash; drawn on paper and photographed or drawn in Word. (2) Copy answers into Word as a flowing explanation. (3) ARU Cite Them Right Harvard. (4) Fill in actual accessed dates. (5) AI NOT permitted. (6) Chart, citations and reference list do NOT count toward 300 words.</div>
+  <div class="refs"><h3>&#128218; Reference List &mdash; copy into Word (ARU Cite Them Right Harvard)</h3><p><b>World Bank (2026)</b>  <i>Commodity Markets Outlook &mdash; Monthly Price Data (Pink Sheet)</i>. Washington DC: World Bank Group. Available at: https://www.worldbank.org/en/research/commodity-markets [Accessed: insert your date].</p><p><b>USDA Foreign Agricultural Service (2024)</b>  <i>Oilseeds: World Markets and Trade</i>. Washington DC: USDA. Available at: https://fas.usda.gov/data/oilseeds-world-markets-and-trade [Accessed: insert your date].</p><p><b>Recide, A. (2024)</b>  El Nino to slash PHL coconut oil exports by a fifth. <i>The Philippine Star</i>, 10 April. Available at: https://www.philstar.com/business/2024/04/10/2346489/el-nio-slash-coconut-oil-exports [Accessed: insert your date].</p><p><b>Reuters (2025)</b>  Humble coconut oil turns into a luxury on rising demand, shrinking output. <i>Reuters</i>, 20 August. Available at: https://www.reuters.com/world/china/humble-coconut-oil-turns-into-luxury-rising-demand-shrinking-output-2025-08-20/ [Accessed: insert your date].</p><p><b>Al Jazeera (2025)</b>  Why are ice cream prices soaring this summer? <i>Al Jazeera</i>, 7 June. Available at: https://www.aljazeera.com/news/2025/6/7/why-are-ice-cream-prices-soaring-this-summer [Accessed: insert your date].</p><p><b>IBISWorld (2025)</b>  <i>Oil and Fat Production in the UK</i>. Available through ARU Library IBISWorld database [Accessed: insert your date].</p><p><b>Helios Ingredients (2025)</b>  Coconut market update &mdash; June 2025. Available at: https://heliosingredients.com/coconut-market-update-june-2025/ [Accessed: insert your date].</p><p><b>International Coconut Community (ICC) (2025a)</b>  <i>Market Review of Coconut Oil &mdash; January 2025</i>. Jakarta: ICC. Available at: https://coconutcommunity.org/page-statistics/market-review/market-review-of-coconut-oil-january-2025 [Accessed: insert your date].</p><p><b>International Coconut Community (ICC) (2025b)</b>  <i>Market Review of Coconut Oil &mdash; May 2025</i>. Jakarta: ICC. Available at: https://www.coconutcommunity.org/index.php/page-statistics/market-review/market-review-of-coconut-oil-may-2025 [Accessed: insert your date].</p><p><b>Mordor Intelligence (2025)</b>  <i>Coconut Oil Market Size and Share Analysis</i>. Available at: https://www.mordorintelligence.com/industry-reports/coconut-oil-market [Accessed: insert your date].</p><p><b>Milling Middle East &amp; Africa (2025)</b>  Coconut oil becomes luxury commodity as global prices soar to record highs. 25 August. Available at: https://millingmea.com/coconut-oil-becomes-luxury-commodity-as-global-prices-soar-to-record-highs/ [Accessed: insert your date].</p><p><b>International Coconut Community (ICC) (2026)</b>  <i>Coconut Oil Market Outlook 2026</i>. Jakarta: ICC. Available at: https://coconutcommunity.org/page-statistics/outlook [Accessed: insert your date].</p><p><b>Vespertool (2025)</b>  Coconut oil prices drop $240/mt. 24 September. Available at: https://vespertool.com/news/coconut-oil-prices-drop-240-mt/ [Accessed: insert your date].</p><p><b>TM Duch&eacute; &amp; Sons Ltd (2026)</b>  <i>Coconut &amp; Edible Oils Market 2025 Review and 2026 Outlook</i>. 9 January. Available at: https://www.tmduche.com/markets/coconut-edible-oils-market-2025-review-2026-outlook/ [Accessed: insert your date].</p><p><b>ChemAnalyst (2025)</b>  <i>Coconut Oil Prices, Trends, Chart, Index and News Q4 2025</i>. Available at: https://www.chemanalyst.com/Pricing-data/coconut-oil-1316 [Accessed: insert your date].</p><p><b>UkrAgroConsult (2025)</b>  The World Bank notes a decline in global prices for coconut and palm oil. 4 December. Available at: https://ukragroconsult.com/en/news/the-world-bank-notes-a-decline-in-global-prices-for-coconut-and-palm-oil/ [Accessed: insert your date].</p></div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(1,3)">&larr; Back</button><button class="nav-btn primary" onclick="switchQ(2)">Go to Q2 &rarr;</button></div>
+</div><div class="page" id="p-q2-1">
+  <div class="page-title"><span class="part-label">Q2 &middot; Part 1</span><h2>Create your Bank Rate line chart</h2></div>
+  <div class="chart-note">
+    <div class="icon">&#128200;</div>
+    <strong>Your teacher will provide you with the Bank Rate chart.</strong>
+    <p>Paste it into your Word document. Label x-axis <b>Date</b>, y-axis <b>Bank Rate (%)</b>. Add a title.</p>
+    <p style="margin-top:6px">Source: Bank of England (2026) &mdash; bankofengland.co.uk/boeapps/database/Bank-Rate.asp</p>
+  </div>
+  <div class="nav-btns"><button class="nav-btn" disabled>&larr; Previous</button><button class="nav-btn primary" onclick="goTo(2,2)">Next: Describe main changes &rarr;</button></div>
+</div><div class="page" id="p-q2-2">
+  <div class="page-title"><span class="part-label">Q2 &middot; Part 2</span><h2>Describe the main changes to Bank Rate</h2></div>
+  <div class="note">Each question points to a specific row in the phase table. Look at the <b>Phase/Dates</b> and <b>Rate</b> columns. Write in your own words. Aim for <b>~150 words total</b>.</div>
+  <div class="sh">What is Bank Rate? &mdash; Bank of England (2026)</div>
+  <div class="note" style="margin-bottom:10px">Bank Rate is the interest rate the Bank of England charges commercial banks to borrow. Changes affect mortgages, loans, savings and credit cards. <b>Raising</b> rates &rarr; dearer borrowing &rarr; less spending &rarr; <b>inflation falls</b>. <b>Cutting</b> rates &rarr; cheaper borrowing &rarr; more spending &rarr; <b>economy grows</b>. Main job: keep CPI inflation at <b>2%</b>.</div>
+  <div class="sh">Phase Table &mdash; Bank of England (2026) unless stated</div>
+  <table class="info-table">
+    <thead><tr><th style="width:20%">Phase / Dates</th><th style="width:16%">Rate</th><th style="width:32%">What happened</th><th>Why &mdash; intended effect</th></tr></thead>
+    <tbody>
+      <tr><td><b>1. Pre-crisis</b><br>Aug 2006 &ndash; Jul 2007</td><td><b>4.75% &rarr; 5.75%</b></td><td>Economy growing strongly. Spending rising.</td><td>Raise rates to cool spending and keep inflation near 2%.</td></tr>
+      <tr><td><b>2. Financial Crisis</b><br>Oct 2008 &ndash; Mar 2009</td><td><b>5.75% &rarr; 0.5%</b></td><td>US subprime collapse. UK banks stopped lending. Deep recession.</td><td>Cut rates to make borrowing cheaper &mdash; stimulate spending and prevent collapse.</td></tr>
+      <tr><td><b>3. Long hold</b><br>2009 &ndash; 2016</td><td><b>Held at 0.5%</b> (7 years)</td><td>Slow recovery. Banks fragile. Inflation close to target.</td><td>Keep rates low to support lending and sustain fragile recovery.</td></tr>
+      <tr><td><b>4. Brexit</b><br>Aug 2016</td><td><b>0.5% &rarr; 0.25%</b></td><td>EU referendum caused sharp rise in economic uncertainty.</td><td>Cut rates to reassure markets and protect economic activity.</td></tr>
+      <tr class="hl"><td><b>5. COVID &#9733;</b><br>Mar 2020</td><td><b>&rarr; 0.1%</b> (record low)</td><td>Pandemic &mdash; sharpest contraction on record. Two emergency cuts in one month.</td><td>Make borrowing as cheap as possible to support households, businesses and government.</td></tr>
+      <tr><td><b>6. Inflation surge</b><br>Dec 2021 &ndash; Aug 2023</td><td><b>0.1% &rarr; 5.25%</b> (14 rises)</td><td>Supply chains disrupted. Ukraine war pushed energy/food prices higher. CPI hit <b>11.1%</b> (Oct 2022) <span class="sm">(ONS, 2022)</span>.</td><td>Raise rates to reduce spending, cool demand, bring inflation back to 2%.</td></tr>
+      <tr><td><b>7. Gradual cuts</b><br>Aug 2024 &ndash; present</td><td><b>5.25% &rarr; 3.75%</b> (6 cuts)</td><td>Inflation fell toward 2%. Two cuts in 2024, four in 2025. Held at 3.75% Feb 2026.</td><td>Reduce the drag on the economy as inflation comes under control.</td></tr>
+    </tbody>
+  </table>
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 1 &mdash; "Aug 2006 | <strong>4.75%</strong>"</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">What was Bank Rate when the chart begins in August 2006?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2026)</span><span class="wc" id="wc-q2p2a">0 words</span></div></div>
+  <textarea id="ta-q2p2a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 1 &mdash; "4.75% &rarr; <strong>5.75%</strong>" reached by July 2007</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">What was the peak rate reached before the financial crisis, and when?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q2p2b">0 words</span></div></div>
+  <textarea id="ta-q2p2b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 2 &mdash; "<strong>5.75% &rarr; 0.5%</strong> | Oct 2008 &ndash; Mar 2009"</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">How sharply did Bank Rate fall during the financial crisis? What rate was reached by March 2009?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2009)</span><span class="wc" id="wc-q2p2c">0 words</span></div></div>
+  <textarea id="ta-q2p2c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 3 &mdash; "Held at 0.5% &mdash; <strong>7 years</strong> &mdash; 2009&ndash;2016 | Slow recovery, banks fragile"</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">For how many years was Bank Rate held at 0.5%? What does this suggest about the economy during that time?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q2p2d">0 words</span></div></div>
+  <textarea id="ta-q2p2d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 4 &mdash; "Aug 2016 | <strong>0.5% &rarr; 0.25%</strong>" (raised back to 0.5% in November 2017)</div>
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">What happened in August 2016 and when was the rate raised again?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2016)</span><span class="wc" id="wc-q2p2e">0 words</span></div></div>
+  <textarea id="ta-q2p2e" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 5 (highlighted) &mdash; "Mar 2020 | &rarr; <strong>0.1%</strong> (record low) | Two emergency cuts in one month"</div>
+  <div class="q-head"><span class="q-letter">f</span><span class="q-text">What happened in March 2020 and what record low was reached?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2020)</span><span class="wc" id="wc-q2p2f">0 words</span></div></div>
+  <textarea id="ta-q2p2f" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2f')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 6 &mdash; "Dec 2021&ndash;Aug 2023 | 0.1% &rarr; <strong>5.25%</strong> (<strong>14 rises</strong>)"</div>
+  <div class="q-head"><span class="q-letter">g</span><span class="q-text">When did rates start rising again? How many consecutive rises, and what peak was reached?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2023)</span><span class="wc" id="wc-q2p2g">0 words</span></div></div>
+  <textarea id="ta-q2p2g" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2g')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table, row 7 &mdash; "Aug 2024&ndash;present | 5.25% &rarr; <strong>3.75%</strong> (6 cuts) | two in 2024, four in 2025"</div>
+  <div class="q-head"><span class="q-letter">h</span><span class="q-text">When did cuts begin? How many cuts in 2025? What is the current Bank Rate?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q2p2h">0 words</span></div></div>
+  <textarea id="ta-q2p2h" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p2h')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+
+  <div class="q-head"><span class="q-letter">i</span><span class="q-text">Name the source you used for your chart data.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2026)</span><span class="wc" id="wc-q2p2i">0 words</span></div></div>
+  <textarea id="ta-q2p2i" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q2p2i')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; When done, copy all answers into Word as one flowing paragraph. Give a figure and date for every key change. Part 2 = describe what happened. Why comes in Part 3.</div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(2,1)">&larr; Back</button><button class="nav-btn primary" onclick="goTo(2,3)">Next: Explain why &rarr;</button></div>
+</div><div class="page" id="p-q2-3">
+  <div class="page-title"><span class="part-label">Q2 &middot; Part 3</span><h2>Explain why &mdash; what economic effects did the Bank want to achieve?</h2></div>
+  <div class="note">Each question points to the relevant row in the Why column. The mechanism box explains the raising/cutting chain. Write in your own words. Aim for <b>~150 words total</b>.</div>
+  <div class="sh">How Bank Rate works &mdash; the mechanism</div>
+  <div class="note" style="margin-bottom:10px"><b>Raising</b> rates &rarr; higher mortgage and loan costs &rarr; households and businesses borrow and spend less &rarr; firms cannot raise prices easily &rarr; <b>inflation falls toward 2% target</b>.<br><br><b>Cutting</b> rates &rarr; cheaper borrowing &rarr; more spending and investment &rarr; greater economic activity &rarr; <b>supports growth and prevents recession deepening</b>.</div>
+  <div class="sh">Why column &mdash; use for your answers</div>
+  <table class="info-table">
+    <thead><tr><th style="width:20%">Phase</th><th style="width:14%">Rate change</th><th>Why &mdash; intended economic effect</th><th style="width:16%" class="src">Source</th></tr></thead>
+    <tbody>
+      <tr><td><b>1. Pre-crisis</b></td><td>&rarr; 5.75%</td><td>Cool spending and keep inflation near 2% target.</td><td class="src">(Bank of England, 2026)</td></tr>
+      <tr><td><b>2. Financial Crisis</b></td><td>&rarr; 0.5%</td><td>Make borrowing cheaper to stimulate spending, investment and prevent economic collapse.</td><td class="src">(Bank of England, 2009)</td></tr>
+      <tr><td><b>3. Long hold</b></td><td>0.5% (7 yrs)</td><td>Support lending and sustain fragile recovery.</td><td class="src">(Bank of England, 2026)</td></tr>
+      <tr><td><b>4. Brexit</b></td><td>&rarr; 0.25%</td><td>Reassure markets, support confidence, protect economic activity.</td><td class="src">(Bank of England, 2016)</td></tr>
+      <tr class="hl"><td><b>5. COVID &#9733;</b></td><td>&rarr; 0.1%</td><td>Make borrowing as cheap as possible to support households, businesses and government during lockdowns.</td><td class="src">(Bank of England, 2020)</td></tr>
+      <tr><td><b>6. Inflation surge</b></td><td>&rarr; 5.25%</td><td>Make borrowing more expensive &mdash; reduce spending, cool demand, bring inflation back to 2%.</td><td class="src">(Bank of England, 2023)<br>(ONS, 2022)</td></tr>
+      <tr><td><b>7. Gradual cuts</b></td><td>&rarr; 3.75%</td><td>Reduce the drag on the economy as inflation comes under control.</td><td class="src">(Bank of England, 2026)</td></tr>
+    </tbody>
+  </table>
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Intro box above the table &mdash; "Main job: keep CPI inflation at <strong>2%</strong>"</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">In one sentence: what is the Bank of England&apos;s primary objective regarding inflation, and what is the target?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2026)</span><span class="wc" id="wc-q2p3a">0 words</span></div></div>
+  <textarea id="ta-q2p3a" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q2p3a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Mechanism box above &mdash; "Raising rates &rarr; higher mortgage/loan costs &rarr; less spending &rarr; firms cannot raise prices &rarr; inflation falls"</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">Explain the mechanism: how does raising Bank Rate cause inflation to fall? Describe the full chain of effects.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q2p3b">0 words</span></div></div>
+  <textarea id="ta-q2p3b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p3b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Why column, row 2 &mdash; "Make borrowing cheaper to stimulate spending, investment and prevent economic collapse"</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">Why did the Bank cut rates so aggressively in 2008&ndash;09? What did it want households and businesses to do, and why?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2009)</span><span class="wc" id="wc-q2p3c">0 words</span></div></div>
+  <textarea id="ta-q2p3c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p3c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Why column, row 5 (highlighted) &mdash; "Make borrowing as cheap as possible to support households, businesses and government during lockdowns"</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">Why did the Bank cut to a record low of 0.1% in March 2020? What specific threat was it responding to?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2020)</span><span class="wc" id="wc-q2p3d">0 words</span></div></div>
+  <textarea id="ta-q2p3d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p3d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> What happened column row 6 &mdash; "Supply chains disrupted. Ukraine war. CPI hit 11.1%" AND Why column &mdash; "reduce spending, cool demand, bring inflation back to 2%"</div>
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">Why did the Bank raise rates 14 times between 2021 and 2023? What caused inflation to surge, and what was the Bank trying to reduce?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2023) and (ONS, 2022)</span><span class="wc" id="wc-q2p3e">0 words</span></div></div>
+  <textarea id="ta-q2p3e" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p3e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Why column, row 7 &mdash; "Inflation fell toward 2% target. Reduce the drag on the economy as inflation comes under control"</div>
+  <div class="q-head"><span class="q-letter">f</span><span class="q-text">Why did the Bank start cutting again from August 2024? What had changed that made this appropriate?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Bank of England, 2026)</span><span class="wc" id="wc-q2p3f">0 words</span></div></div>
+  <textarea id="ta-q2p3f" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q2p3f')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="q-row">
+
+  <div class="q-head"><span class="q-letter">g</span><span class="q-text">List your citations here &mdash; at least 3, including Bank of England.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q2p3g">0 words</span></div></div>
+  <textarea id="ta-q2p3g" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q2p3g')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+  <div class="hint">
+    <strong>&#128161; Levels of thinking:</strong>
+    <div class="lvl"><b>Level 1:</b> "The Bank cut rates because the economy was struggling." &mdash; no mechanism, no intended effect explained.</div>
+    <div class="lvl"><b>Level 2:</b> Names the intended effect &mdash; e.g. "to make borrowing cheaper and encourage spending and investment."</div>
+    <div class="lvl"><b>Level 3:</b> Explains the full chain and links it to the specific context &mdash; COVID lockdowns, Ukraine war, energy prices, inflation target.</div>
+    <div class="lvl"><b>Level 4:</b> Acknowledges the tension &mdash; raising rates to reduce inflation also risks slowing growth. Explains how the Bank balanced both objectives.</div>
+  </div>
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; <b>Reminders:</b> (1) Copy into Word as flowing explanation. (2) Part 2 = describe. Part 3 = explain WHY. (3) ARU Cite Them Right Harvard. (4) Fill in actual accessed dates. (5) AI NOT permitted. (6) Chart, citations and reference list do NOT count toward 300 words.</div>
+  <div class="refs"><h3>&#128218; Reference List &mdash; copy into Word (ARU Cite Them Right Harvard)</h3><p><b>Bank of England (2026)</b>  <i>Bank Rate history and data</i>. London: Bank of England. Available at: https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp [Accessed: insert your date].</p><p><b>Bank of England (2023)</b>  Monetary Policy Summary and Minutes &mdash; August 2023. Available at: https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2023/august-2023 [Accessed: insert your date].</p><p><b>Bank of England (2020)</b>  Monetary Policy Summary and Minutes &mdash; March 2020. Available at: https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2020/march-2020 [Accessed: insert your date].</p><p><b>Bank of England (2016)</b>  Monetary Policy Summary and Minutes &mdash; August 2016. Available at: https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2016/august-2016 [Accessed: insert your date].</p><p><b>Bank of England (2009)</b>  Monetary Policy Summary and Minutes &mdash; March 2009. Available at: https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2009/march-2009 [Accessed: insert your date].</p><p><b>ONS (Office for National Statistics) (2022)</b>  Consumer price inflation, UK: October 2022. Available at: https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/october2022 [Accessed: insert your date].</p><p><i>Note:</i> You may also cite BBC News, Reuters or The Guardian articles covering specific MPC decisions. Search the exact meeting date and find a news article from the same day.</p></div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(2,2)">&larr; Back</button><button class="nav-btn primary" onclick="switchQ(3)">Go to Q3 &rarr;</button></div>
+</div><div class="page" id="p-q3-1">
+  <div class="page-title"><span class="part-label">Q3 &middot; Part 1</span><h2>Access the IBISWorld Craft Beer report</h2></div>
+  <div class="note">Follow these steps to find the report. You need the <b>Competitive Forces</b> section and the <b>Companies</b> section. Your answers to Parts 2 and 3 must come from your own reading of the report.</div>
+  <div class="sh">How to access IBISWorld SP0.002</div>
+  <div class="access-box">
+    <div class="access-step"><span class="snum">1</span><span>Go to the <b>ARU Library website</b> &mdash; library.aru.ac.uk</span></div>
+    <div class="access-step"><span class="snum">2</span><span>Click <b>Databases A&ndash;Z</b> and search for <b>IBISWorld</b></span></div>
+    <div class="access-step"><span class="snum">3</span><span>Log in with your ARU student credentials if prompted</span></div>
+    <div class="access-step"><span class="snum">4</span><span>In the IBISWorld search bar, type <b>"Craft Beer Production"</b> and select the <b>UK</b> report (report code SP0.002)</span></div>
+    <div class="access-step"><span class="snum">5</span><span>Once in the report, find and read the <b>Competitive Forces</b> section &mdash; look for: number of firms, market concentration, barriers to entry, pricing power, product differentiation</span></div>
+    <div class="access-step"><span class="snum">6</span><span>Also read the <b>Companies</b> section &mdash; look for: the largest companies, their market share, how much of the market the top firms control</span></div>
+    <div class="access-step"><span class="snum">7</span><span>Make notes on: total number of firms, top firm market shares (%), degree of product differentiation, barriers to entry, and any pricing power mentioned</span></div>
+  </div>
+  <div class="note gold">&#9888;&#65039; <b>Important:</b> Do NOT guess or invent any figures from IBISWorld. If you cannot access the report, ask your teacher. All statistics in Parts 2 and 3 must come from the report itself &mdash; you must have read it.</div>
+  <div class="nav-btns"><button class="nav-btn" disabled>&larr; Previous</button><button class="nav-btn primary" onclick="goTo(3,2)">Next: Market structure &rarr;</button></div>
+</div><div class="page" id="p-q3-2">
+  <div class="page-title"><span class="part-label">Q3 &middot; Part 2</span><h2>Identify and argue the market structure</h2></div>
+  <div class="note">Use the four market structure definitions below (from your textbook Chapter 5 and Week 5 lecture) PLUS the figures you found in IBISWorld SP0.002. You must argue which structure best fits &mdash; and justify it with evidence. Aim for <b>~150 words total</b>.</div>
+
+  <div class="sh">Four market structures &mdash; textbook Chapter 5 / Week 5 lecture</div>
+  <table class="info-table">
+    <thead><tr><th style="width:22%">Structure</th><th style="width:19%">Number of firms</th><th style="width:20%">Product differentiation</th><th style="width:20%">Pricing power</th><th>Barriers to entry</th></tr></thead>
+    <tbody>
+      <tr><td><b>Perfect competition</b></td><td>Very many</td><td>Identical (homogeneous)</td><td>None &mdash; price taker</td><td>Very low &mdash; free entry/exit</td></tr>
+      <tr><td><b>Monopolistic competition</b></td><td>Many</td><td>Differentiated (brand, style, taste)</td><td>Some &mdash; over own brand</td><td>Low &mdash; relatively easy entry</td></tr>
+      <tr><td><b>Oligopoly</b></td><td>Few large firms</td><td>Can be similar or differentiated</td><td>Significant &mdash; interdependent pricing</td><td>High &mdash; capital, brand, scale</td></tr>
+      <tr><td><b>Monopoly</b></td><td>One firm only</td><td>Unique &mdash; no close substitutes</td><td>Very high &mdash; price maker</td><td>Very high &mdash; blocks all entry</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh" style="margin-top:14px">What to look for in IBISWorld SP0.002 &mdash; use your notes from Part 1</div>
+  <table class="info-table">
+    <thead class="blue"><tr><th style="width:30%">What to check in IBISWorld</th><th>Why it matters for identifying market structure</th></tr></thead>
+    <tbody>
+      <tr><td><b>Total number of firms</b></td><td>Many firms &rarr; rules out monopoly and oligopoly. Few dominant firms &rarr; suggests oligopoly.</td></tr>
+      <tr><td><b>Market share of top firms</b></td><td>If top 3&ndash;5 firms hold a large % of market share together, that points toward oligopoly. Fragmented shares point toward monopolistic competition.</td></tr>
+      <tr><td><b>Product differentiation</b></td><td>Craft beers are heavily differentiated by style, brand, ingredients, origin &mdash; this rules out perfect competition.</td></tr>
+      <tr><td><b>Barriers to entry</b></td><td>Low capital needed &rarr; easy entry &rarr; monopolistic competition. High brand/scale barriers &rarr; oligopoly tendency.</td></tr>
+      <tr><td><b>Pricing power</b></td><td>Can firms set their own prices? If yes and limited by competition &rarr; monopolistic competition. If dominant firms lead prices &rarr; oligopoly.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Your IBISWorld notes, Companies section &mdash; find the total number of operators/businesses listed in the report</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">How many firms operate in the UK craft beer market according to IBISWorld SP0.002? Does this suggest a concentrated or fragmented market?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (IBISWorld, 2025)</span><span class="wc" id="wc-q3p2a">0 words</span></div></div>
+  <textarea id="ta-q3p2a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p2a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Your IBISWorld notes, Companies section &mdash; find the market share % of the top 3&ndash;5 companies</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">What market share do the largest firms hold? Is market share spread evenly or concentrated among a few firms?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (IBISWorld, 2025)</span><span class="wc" id="wc-q3p2b">0 words</span></div></div>
+  <textarea id="ta-q3p2b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p2b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Your IBISWorld notes, Competitive Forces section &mdash; look for product differentiation, branding, consumer loyalty, premium pricing</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">How differentiated are the products? Do craft brewers compete on price, or on brand/style/taste?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q3p2c">0 words</span></div></div>
+  <textarea id="ta-q3p2c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p2c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Your IBISWorld notes, Competitive Forces section &mdash; look for capital requirements, regulation, brand loyalty, scale economies as barriers to entry</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">How easy is it for new firms to enter the craft beer market? What are the main barriers?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q3p2d">0 words</span></div></div>
+  <textarea id="ta-q3p2d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p2d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Compare your IBISWorld evidence against the four structures in the table above &mdash; work through each one systematically and rule out those that do not match</div>
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">Based on your answers above, which market structure best describes UK craft beer production &mdash; and why? Explain why the other three structures do NOT fit.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (IBISWorld, 2025) and your textbook Chapter 5</span><span class="wc" id="wc-q3p2e">0 words</span></div></div>
+  <textarea id="ta-q3p2e" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p2e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+
+  <div class="q-head"><span class="q-letter">f</span><span class="q-text">List your citations here.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (IBISWorld, 2025) | your textbook | (Lecture 5, 2025)</span><span class="wc" id="wc-q3p2f">0 words</span></div></div>
+  <textarea id="ta-q3p2f" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q3p2f')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; When done, copy all answers into Word as one flowing argument. Every claim must be supported by evidence from IBISWorld or your textbook.</div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(3,1)">&larr; Back</button><button class="nav-btn primary" onclick="goTo(3,3)">Next: Suggest improvements &rarr;</button></div>
+</div><div class="page" id="p-q3-3">
+  <div class="page-title"><span class="part-label">Q3 &middot; Part 3</span><h2>Suggest improvements to a craft brewer&apos;s market position</h2></div>
+  <div class="note">Your suggestions must be <b>directly linked to the characteristics of the market structure you identified in Part 2</b>. Generic business advice will not score well. Each suggestion must explain: what the brewer should do, why it suits this specific market structure, and what competitive advantage it creates. Aim for <b>~150 words total</b>.</div>
+
+  <div class="sh">Connecting market structure to strategy &mdash; use this as your guide</div>
+  <table class="info-table">
+    <thead class="blue"><tr><th style="width:28%">Characteristic of this market</th><th>What strategic options does this open up?</th></tr></thead>
+    <tbody>
+      <tr><td><b>Product differentiation possible</b></td><td>Invest in branding, unique recipes, local identity, premium positioning &mdash; customers pay more for a product they perceive as distinctive</td></tr>
+      <tr><td><b>Many firms competing</b></td><td>Find a niche that is underserved &mdash; e.g. specific style, location, dietary need (gluten-free, vegan) &mdash; reduces direct competition</td></tr>
+      <tr><td><b>Some pricing power over own brand</b></td><td>Build customer loyalty through quality and story &mdash; loyal customers are less price-sensitive and reduce the threat of substitutes</td></tr>
+      <tr><td><b>Relatively low barriers to entry</b></td><td>New entrants can appear quickly &mdash; so existing firms must continuously innovate or strengthen brand loyalty to retain their position</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Choose a strategy from the guide table above &mdash; make it specific to craft beer, not just generic business advice</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">What is your first suggestion for improving a craft brewer&apos;s market position? State it clearly in one sentence.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q3p3a">0 words</span></div></div>
+  <textarea id="ta-q3p3a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p3a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Link back to Part 2 &mdash; e.g. "Because this market has many competing firms with differentiated products (IBISWorld, 2025), a brewer that builds strong brand loyalty faces less direct price competition..."</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">How does this suggestion link directly to the characteristics of the market structure you identified in Part 2? Explain the connection.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (IBISWorld, 2025) | your textbook Chapter 5</span><span class="wc" id="wc-q3p3b">0 words</span></div></div>
+  <textarea id="ta-q3p3b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p3b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Choose a different strategy from the guide table &mdash; it should address a different characteristic of the market than your first suggestion</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">What is your second suggestion? State it clearly in one sentence.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q3p3c">0 words</span></div></div>
+  <textarea id="ta-q3p3c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p3c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Again link back to Part 2 &mdash; explain why this strategy makes sense given the number of firms, barriers to entry, pricing power, or differentiation in this market</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">How does this second suggestion link to the market structure? What specific competitive advantage would it create for the brewer?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (IBISWorld, 2025) | your textbook Chapter 5</span><span class="wc" id="wc-q3p3d">0 words</span></div></div>
+  <textarea id="ta-q3p3d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q3p3d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">List your citations here.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (IBISWorld, 2025) | your textbook | (Lecture 5, 2025)</span><span class="wc" id="wc-q3p3e">0 words</span></div></div>
+  <textarea id="ta-q3p3e" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q3p3e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="hint">
+    <strong>&#128161; Levels of thinking:</strong>
+    <div class="lvl"><b>Level 1:</b> Generic advice &mdash; e.g. "They should advertise more." No link to market structure.</div>
+    <div class="lvl"><b>Level 2:</b> Names a relevant strategy and links it to one feature of the market &mdash; e.g. "Because there are many competitors, they should differentiate."</div>
+    <div class="lvl"><b>Level 3:</b> Uses IBISWorld evidence to show WHY the market structure creates this particular strategic need, and explains the competitive advantage created.</div>
+    <div class="lvl"><b>Level 4:</b> Acknowledges trade-offs &mdash; e.g. a niche strategy reduces competition but also limits market size. Shows sophisticated understanding of the structure.</div>
+  </div>
+
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; <b>Reminders:</b> (1) Copy answers into Word as flowing paragraphs. (2) Every claim needs evidence from IBISWorld or textbook. (3) ARU Cite Them Right Harvard. (4) Fill in actual accessed dates. (5) AI NOT permitted. (6) Citations and reference list do NOT count toward 300 words.</div>
+  <div class="refs"><h3>&#128218; Reference List &mdash; copy into Word (ARU Cite Them Right Harvard)</h3>
+<p><b>IBISWorld (2025)</b>  <i>Craft Beer Production in the UK (SP0.002)</i>. IBISWorld. Available through ARU Library IBISWorld database [Accessed: insert your date].</p>
+<p><b>[Your textbook author(s)] (year)</b>  <i>[Your textbook title]</i>. Chapter 5 &mdash; Market Structures. [Publisher details from your copy].</p>
+<p><i>Note:</i> You may also cite your Lecture 5 notes and Seminar 6 materials as: [Module code] Lecture 5 (2025) <i>Market Structures</i>. ARU: unpublished lecture notes. Use the format your module leader specifies.</p>
+</div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(3,2)">&larr; Back</button><button class="nav-btn primary" onclick="switchQ(4)">Go to Q4 &rarr;</button></div>
+</div><div class="page" id="p-q4-1">
+  <div class="page-title"><span class="part-label">Q4 &middot; Part 1</span><h2>Review the Amazon screenshots</h2></div>
+  <div class="note">Your teacher has already provided the two screenshots as part of the assignment. You do not need to download anything. Review them carefully before moving to Part 2.</div>
+
+  <div class="sh">Screenshot 1 &mdash; Amazon laser pointer product listing</div>
+  <div class="screenshot-note">
+    <h4>What you should be able to see in Screenshot 1:</h4>
+    <ul style="padding-left:18px;font-size:13px;line-height:1.6">
+      <li>Price: <b>&pound;5.97</b> with RRP <b>&pound;8.00</b> crossed out &mdash; showing a <b>&minus;25%</b> saving</li>
+      <li><b>#1 Best Seller</b> badge in its category</li>
+      <li>Star rating: <b>4.5 stars</b> from <b>1,428 reviews</b></li>
+      <li>Social proof: <b>5K+ bought in past month</b></li>
+      <li>Countdown timer: <b>"Ends in 21:06:54"</b></li>
+      <li>Colour options available at different prices</li>
+    </ul>
+  </div>
+
+  <div class="sh">Screenshot 2 &mdash; Rufus AI price comparison</div>
+  <div class="screenshot-note">
+    <h4>What you should be able to see in Screenshot 2:</h4>
+    <ul style="padding-left:18px;font-size:13px;line-height:1.6">
+      <li>Rufus AI statement: the current deal price of &pound;5.97 is a saving of 25% off the RRP</li>
+      <li>Rufus AI statement: it is consistent with the average Featured Offer price on Amazon in the past 30 days</li>
+      <li>A <b>price history chart</b> showing the price bouncing between <b>&pound;5.97 and &pound;7.00</b> over the past 90 days</li>
+    </ul>
+  </div>
+
+  <div class="note gold">&#9888;&#65039; Check you can clearly see both screenshots before moving to Part 2. If anything is unclear, ask your teacher. Your analysis in Parts 2 and 3 must refer to specific elements visible in the screenshots.</div>
+  <div class="nav-btns"><button class="nav-btn" disabled>&larr; Previous</button><button class="nav-btn primary" onclick="goTo(4,2)">Next: Identify tactics &rarr;</button></div>
+</div><div class="page" id="p-q4-2">
+  <div class="page-title"><span class="part-label">Q4 &middot; Part 2</span><h2>Identify and explain the consumer influence tactics</h2></div>
+  <div class="note">Each question points to a specific element visible in the screenshots. Use your <b>Lecture 6 notes</b> and <b>Seminar 7 materials</b> to name and explain each tactic. Aim for <b>~150 words total</b>. Do not just describe what you see &mdash; explain how it influences the consumer.</div>
+
+  <div class="sh">Tactics visible in the screenshots &mdash; reference your Lecture 6 notes for definitions</div>
+  <table class="info-table">
+    <thead class="blue"><tr><th style="width:22%">Tactic</th><th style="width:30%">What you can see in the screenshots</th><th>How it is designed to influence the consumer</th></tr></thead>
+    <tbody>
+      <tr><td><b>Price anchoring (RRP / was-now)</b></td><td>&pound;8.00 crossed out &rarr; &pound;5.97 shown as current price</td><td>The higher original price acts as an anchor &mdash; makes &pound;5.97 feel like a bargain even if &pound;5.97 was always the real price</td></tr>
+      <tr><td><b>Percentage discount framing</b></td><td>&minus;25% saving shown prominently</td><td>A percentage sounds larger than the absolute saving (&pound;2.03) &mdash; makes the deal feel more significant</td></tr>
+      <tr><td><b>Urgency / scarcity</b></td><td>Countdown timer: "Ends in 21:06:54"</td><td>Creates fear of missing out (FOMO) &mdash; pushes consumer to buy now rather than delay and potentially lose the deal</td></tr>
+      <tr><td><b>Social proof</b></td><td>#1 Best Seller | 4.5 stars | 1,428 reviews | 5K+ bought in past month</td><td>Signals that others trust and have bought this product &mdash; reduces perceived risk for the buyer</td></tr>
+      <tr><td><b>AI price justification (Rufus)</b></td><td>Rufus AI: "&pound;5.97 is consistent with average Featured Offer price over past 30 days"</td><td>Uses authority of AI to validate the price as fair &mdash; reduces the consumer&apos;s motivation to look elsewhere or negotiate</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table above, row 1 &mdash; "&pound;8.00 crossed out &rarr; &pound;5.97 | higher original price acts as anchor"</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">What is price anchoring? Identify the specific element in Screenshot 1 that uses this tactic, and explain how it is designed to make the consumer feel they are getting a good deal.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Lecture 6, 2025) | (Amazon, 2025)</span><span class="wc" id="wc-q4p2a">0 words</span></div></div>
+  <textarea id="ta-q4p2a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p2a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table above, row 2 &mdash; "&minus;25% saving shown prominently | percentage sounds larger than absolute amount"</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">How is the percentage discount displayed? Why might showing &minus;25% be more persuasive than simply showing the &pound;2.03 saving?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Lecture 6, 2025)</span><span class="wc" id="wc-q4p2b">0 words</span></div></div>
+  <textarea id="ta-q4p2b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p2b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table above, row 3 &mdash; "Countdown timer: 'Ends in 21:06:54' | creates FOMO &mdash; buy now rather than delay"</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">What urgency tactic is used in Screenshot 1? Name the specific element and explain how it is intended to change the consumer&apos;s behaviour.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Lecture 6, 2025) | (Amazon, 2025)</span><span class="wc" id="wc-q4p2c">0 words</span></div></div>
+  <textarea id="ta-q4p2c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p2c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table above, row 4 &mdash; "#1 Best Seller | 4.5 stars | 1,428 reviews | 5K+ bought in past month | signals others trust this product"</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">List all four social proof signals visible in Screenshot 1. For each one, explain how it reduces the consumer&apos;s perceived risk.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Lecture 6, 2025) | (Amazon, 2025)</span><span class="wc" id="wc-q4p2d">0 words</span></div></div>
+  <textarea id="ta-q4p2d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p2d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Table above, row 5 &mdash; "Rufus AI validates &pound;5.97 as fair using authority of AI | price history chart shows price has not been lower &mdash; removes motivation to wait for a better deal"</div>
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">How does the Rufus AI response in Screenshot 2 attempt to influence the consumer? What role does the price history chart play?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Amazon Rufus AI, 2025) | (Lecture 6, 2025)</span><span class="wc" id="wc-q4p2e">0 words</span></div></div>
+  <textarea id="ta-q4p2e" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p2e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+
+  <div class="q-head"><span class="q-letter">f</span><span class="q-text">List your citations here.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Amazon, 2025) | (Amazon Rufus AI, 2025) | (Lecture 6, 2025)</span><span class="wc" id="wc-q4p2f">0 words</span></div></div>
+  <textarea id="ta-q4p2f" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q4p2f')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; When done, copy answers into Word as flowing paragraphs. Each tactic must be named, located in the screenshot, and explained &mdash; not just described.</div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(4,1)">&larr; Back</button><button class="nav-btn primary" onclick="goTo(4,3)">Next: Go deeper &rarr;</button></div>
+</div><div class="page" id="p-q4-3">
+  <div class="page-title"><span class="part-label">Q4 &middot; Part 3</span><h2>Go deeper &mdash; analyse two tactics using Lecture 6 and Seminar 7</h2></div>
+  <div class="note">Choose <b>two</b> of the tactics from Part 2 that you think are the most powerful. Use concepts from your <b>Lecture 6 notes</b> and <b>Seminar 7 materials</b> to explain the psychological and economic reasoning behind them. Do not just describe the tactic again &mdash; explain <em>why it works</em>. Aim for <b>~150 words total</b>.</div>
+
+  <div class="sh">Deeper concepts to draw on &mdash; check your Lecture 6 and Seminar 7 notes for these</div>
+  <table class="info-table">
+    <thead class="blue"><tr><th style="width:28%">Concept (check your notes)</th><th>How it connects to the Amazon screenshots</th></tr></thead>
+    <tbody>
+      <tr><td><b>Bounded rationality</b></td><td>Consumers do not process all information perfectly &mdash; they use mental shortcuts (heuristics). The RRP anchor, the Best Seller badge, and the Rufus AI validation all exploit these shortcuts</td></tr>
+      <tr><td><b>Loss aversion</b></td><td>The fear of losing a deal (countdown timer, limited-time offer) is psychologically stronger than the pleasure of gaining &mdash; pushes consumers toward impulsive purchase decisions</td></tr>
+      <tr><td><b>Herding / social proof</b></td><td>Consumers look to others&apos; behaviour to reduce uncertainty &mdash; "5K+ bought" signals that buying is the rational choice, reducing individual deliberation</td></tr>
+      <tr><td><b>Information asymmetry</b></td><td>The consumer does not know the true market price or cost of production &mdash; Rufus AI appears to close this gap but actually reinforces Amazon&apos;s framing of what is "fair"</td></tr>
+      <tr><td><b>Framing effects</b></td><td>The same fact presented differently produces different decisions &mdash; "&minus;25%" and "save &pound;2.03" are identical facts but produce different responses</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sh" style="margin-top:18px">Answer each question</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Think about which two tactics together would most likely push a hesitant consumer to buy &mdash; consider urgency, social validation, and price perception</div>
+  <div class="q-head"><span class="q-letter">a</span><span class="q-text">Which two tactics from Part 2 do you consider the most powerful in influencing the consumer to buy? Name them both and briefly state why you chose them.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q4p3a">0 words</span></div></div>
+  <textarea id="ta-q4p3a" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p3a')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Concepts table above &mdash; match your chosen tactic to the relevant concept (e.g. countdown timer &rarr; loss aversion | RRP anchor &rarr; bounded rationality/framing)</div>
+  <div class="q-head"><span class="q-letter">b</span><span class="q-text">Explain the first tactic in depth using concepts from Lecture 6 and/or Seminar 7. Why does it work psychologically or economically? Why might a consumer buy because of it even if they were not planning to?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Lecture 6, 2025) | (Seminar 7, 2025)</span><span class="wc" id="wc-q4p3b">0 words</span></div></div>
+  <textarea id="ta-q4p3b" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p3b')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Concepts table above &mdash; explain the psychological mechanism. Then consider: does this tactic become even more effective when used alongside the first tactic you chose?</div>
+  <div class="q-head"><span class="q-letter">c</span><span class="q-text">Explain the second tactic in depth using concepts from Lecture 6 and/or Seminar 7. How does it interact with or reinforce the first tactic?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Lecture 6, 2025) | (Seminar 7, 2025)</span><span class="wc" id="wc-q4p3c">0 words</span></div></div>
+  <textarea id="ta-q4p3c" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p3c')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+  <div class="snip">&#128205; <strong>From the table above:</strong> Think about bounded rationality &mdash; a fully rational consumer would ignore anchors, discounts and timers and focus only on whether &pound;5.97 is the lowest available price for this product</div>
+  <div class="q-head"><span class="q-letter">d</span><span class="q-text">Overall: would a fully rational consumer (as described in classical economics) be influenced by these tactics? Why or why not? What does this tell us about real consumer behaviour?</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="wc" id="wc-q4p3d">0 words</span></div></div>
+  <textarea id="ta-q4p3d" style="min-height:88px" placeholder="Write here&hellip;" oninput="updateWC('q4p3d')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="q-row">
+
+  <div class="q-head"><span class="q-letter">e</span><span class="q-text">List your citations here.</span></div>
+  <div class="q-box-top"><span class="lbl">Your answer</span><div style="display:flex;gap:8px;align-items:center"><span class="cite-chip">&#128221; Cite as: (Lecture 6, 2025) | (Seminar 7, 2025) | (Amazon, 2025)</span><span class="wc" id="wc-q4p3e">0 words</span></div></div>
+  <textarea id="ta-q4p3e" style="min-height:70px" placeholder="Write here&hellip;" oninput="updateWC('q4p3e')"></textarea>
+  <div class="paste-note">&#128274; Typing only &mdash; pasting blocked. Copy your answer to Word when done.</div>
+</div>
+
+  <div class="hint">
+    <strong>&#128161; Levels of thinking:</strong>
+    <div class="lvl"><b>Level 1:</b> Describes what is visible in the screenshot &mdash; e.g. "There is a countdown timer." No psychological or economic explanation.</div>
+    <div class="lvl"><b>Level 2:</b> Names the tactic and states its intended effect &mdash; e.g. "The countdown timer creates urgency to buy."</div>
+    <div class="lvl"><b>Level 3:</b> Explains the psychological or economic mechanism using Lecture 6/Seminar 7 concepts &mdash; e.g. links to loss aversion, bounded rationality, or information asymmetry.</div>
+    <div class="lvl"><b>Level 4:</b> Analyses how two or more tactics interact and reinforce each other &mdash; and considers what this reveals about the gap between classical economic assumptions and real consumer behaviour.</div>
+  </div>
+
+  <div class="note gold" style="margin-top:12px">&#9888;&#65039; <b>Reminders:</b> (1) Copy answers into Word as flowing analysis. (2) Part 2 = identify and explain all tactics. Part 3 = go deeper on two using theory. (3) ARU Cite Them Right Harvard. (4) AI NOT permitted. (5) Citations and reference list do NOT count toward 300 words.</div>
+  <div class="refs"><h3>&#128218; Reference List &mdash; copy into Word (ARU Cite Them Right Harvard)</h3>
+<p><b>Amazon (2025)</b>  [Laser pointer product listing &mdash; screenshot]. Amazon.co.uk. Available at: https://www.amazon.co.uk [Accessed: insert your date].</p>
+<p><b>Amazon Rufus AI (2025)</b>  [Rufus AI price comparison response &mdash; screenshot]. Amazon.co.uk. Available at: https://www.amazon.co.uk [Accessed: insert your date].</p>
+<p><b>[Module code] Lecture 6 (2025)</b>  <i>Consumer Behaviour and Decision-Making</i>. ARU: unpublished lecture notes.</p>
+<p><b>[Module code] Seminar 7 (2025)</b>  <i>Consumer Influence Tactics</i>. ARU: unpublished seminar materials.</p>
+<p><i>Note:</i> Use the exact lecture/seminar citation format your module leader specifies. The format above is a template only.</p>
+</div>
+  <div class="nav-btns"><button class="nav-btn" onclick="goTo(4,2)">&larr; Back</button><button class="nav-btn" disabled style="opacity:.3">End of worksheets</button></div>
+</div>
+</main>
+<script>
+var qL={
+  1:['Part 1: Chart','Part 2: Describe','Part 3: Explain why','Part 4: Diagram'],
+  2:['Part 1: Chart','Part 2: Describe','Part 3: Explain why'],
+  3:['Part 1: Access IBISWorld','Part 2: Market structure','Part 3: Improvements'],
+  4:['Part 1: Screenshots','Part 2: Identify tactics','Part 3: Go deeper']
+};
+function switchQ(q){
+  document.querySelectorAll('.q-tab').forEach(function(b,i){b.classList.toggle('active',i+1===q);});
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('p-q'+q+'-1').classList.add('active');
+  buildProg(q,1);window.scrollTo(0,0);
+}
+function goTo(q,p){
+  document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active');});
+  var t=document.getElementById('p-q'+q+'-'+p);
+  if(t)t.classList.add('active');
+  buildProg(q,p);window.scrollTo(0,0);
+}
+function buildProg(q,cur){
+  var bar=document.getElementById('progress-bar');
+  var labs=qL[q];var h='';
+  for(var i=0;i<labs.length;i++){
+    var n=i+1,cls='step-btn'+(n===cur?' active':n<cur?' done':'');
+    h+='<button class="'+cls+'" onclick="goTo('+q+','+n+')">'+(n<cur?'&#10003; ':'')+labs[i]+'</button>';
+    if(i<labs.length-1)h+='<span class="step-divider">&#x203A;</span>';
+  }
+  bar.innerHTML=h;
+}
+function updateWC(id){
+  var ta=document.getElementById('ta-'+id);
+  var b=document.getElementById('wc-'+id);
+  if(!ta||!b)return;
+  var w=ta.value.trim()===''?0:ta.value.trim().split(/\s+/).length;
+  b.textContent=w+(w===1?' word':' words');
+  b.className='wc'+(w>=6?w>40?' over':' ok':'');
+}
+document.querySelectorAll('textarea').forEach(function(ta){
+  ta.addEventListener('paste',function(e){
+    e.preventDefault();
+    var t=document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function(){t.classList.remove('show');},2500);
+  });
+});
+buildProg(1,1);
+</script>
+</body>
+</html>
